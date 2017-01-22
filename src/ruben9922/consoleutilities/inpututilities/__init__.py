@@ -39,9 +39,9 @@ def input_option_char(valid_options, message="Enter option: "):
     return option
 
 
-def input_option_int(title_list, option_count):
-    for i in range(0, len(title_list)):
-        print("  {0}: {1}".format(i, title_list[i]))
+def input_option_int(options, option_count):
+    for i in range(0, len(options)):
+        print("  {0}: {1}".format(i, options[i]))
     while True:
         option = input_int("Enter option: ")
         if 0 <= option < option_count:
