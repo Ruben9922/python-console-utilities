@@ -3,33 +3,33 @@ __author__ = 'Ruben9922'
 __project__ = "ConsoleUtilities"
 
 
-def input_int(message):
+def input_int(prompt):
     input_valid = False
     while not input_valid:
         try:
-            number = int(input(message))
+            number = int(input(prompt))
             input_valid = True
             return number
         except ValueError as e:
             print("Integers only! ({0})".format(e))
 
 
-def input_float(message):
+def input_float(prompt):
     input_valid = False
     while not input_valid:
         try:
-            number = float(input(message))
+            number = float(input(prompt))
             input_valid = True
             return number
         except ValueError as e:
             print("Numbers only! Decimals are allowed. ({0})".format(e))
 
 
-def input_option_char(valid_options, message="Enter option: "):
+def input_option_char(valid_options, prompt="Enter option: "):
     option = ""
     input_valid = False
     while not input_valid:
-        option = input(message).lower()
+        option = input(prompt).lower()
         for valid_option in valid_options:
             if option == valid_option:
                 input_valid = True
