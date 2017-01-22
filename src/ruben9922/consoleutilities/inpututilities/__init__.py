@@ -22,10 +22,10 @@ def input_float(prompt):
             input_valid = True
             return number
         except ValueError as e:
-            print("Numbers only! Decimals are allowed. ({0})".format(e))
+            print("Real numbers only! ({0})".format(e))
 
 
-def input_option_char(valid_options, prompt="Enter option: "):
+def input_option_char(valid_options, prompt="Choose option: "):
     option = ""
     input_valid = False
     while not input_valid:
