@@ -39,12 +39,12 @@ def input_option_char(valid_options, message="Enter option: "):
     return option
 
 
-def input_option_int(options, option_count):
+def input_option_int(options):
     for i in range(0, len(options)):
         print("  {0}: {1}".format(i, options[i]))
     while True:
         option = input_int("Enter option: ")
-        if 0 <= option < option_count:
+        if 0 <= option < len(options):
             break
         else:
             print("Invalid option!")
