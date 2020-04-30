@@ -48,10 +48,3 @@ def input_option_int(options, prompt="Choose option: "):
 
 def input_y_or_n(prompt):
     return input(prompt).lower() == "y"
-
-
-def search_array(item, array):
-    for i in range(len(array)):
-        if item == array[i]:
-            return i
-    return -1
