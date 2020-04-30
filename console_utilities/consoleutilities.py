@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-__author__ = 'Ruben9922'
-__project__ = "ConsoleUtilities"
-
-
 def input_int(prompt):
     input_valid = False
     while not input_valid:
