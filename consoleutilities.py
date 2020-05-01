@@ -1,26 +1,26 @@
-def input_int(prompt):
+def input_int(prompt, error_message="Integers only."):
     input_valid = False
     while not input_valid:
         try:
             number = int(input(prompt))
             input_valid = True
             return number
-        except ValueError as e:
-            print("Integers only! ({0})".format(e))
+        except ValueError:
+            print(error_message)
 
 
-def input_float(prompt):
+def input_float(prompt, error_message="Real numbers only."):
     input_valid = False
     while not input_valid:
         try:
             number = float(input(prompt))
             input_valid = True
             return number
-        except ValueError as e:
-            print("Real numbers only! ({0})".format(e))
+        except ValueError:
+            print(error_message)
 
 
-def input_option_char(valid_options, prompt="Choose option: "):
+def input_option_char(valid_options, prompt="Choose option: ", error_message="Invalid option."):
     option = ""
     input_valid = False
     while not input_valid:
@@ -30,11 +30,11 @@ def input_option_char(valid_options, prompt="Choose option: "):
                 input_valid = True
                 break
         if not input_valid:
-            print("Invalid option!")
+            print(error_message)
     return option
 
 
-def input_option_int(options, prompt="Choose option: "):
+def input_option_int(options, prompt="Choose option: ", error_message="Invalid option."):
     for i in range(0, len(options)):
         print("  {0}: {1}".format(i, options[i]))
     while True:
@@ -42,7 +42,7 @@ def input_option_int(options, prompt="Choose option: "):
         if 0 <= option < len(options):
             break
         else:
-            print("Invalid option!")
+            print(error_message)
     return option
 
 
