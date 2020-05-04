@@ -1,0 +1,19 @@
+language: python
+python:
+- '3.6'
+- '3.7'
+- '3.8'
+install:
+- pip install -r requirements.txt
+script:
+- echo "skipping tests"
+deploy:
+  provider: pypi
+  user: __token__
+  password:
+    secure: RrQL/jB3f7DSHjtBVp2ybTrKso7hsgE67eHXLr0JPpT28JqS1SLNIst76dWte+TdhIcJki8/cletLQM8WrZz1+0+xU2E5YdGP3SYUydcVZPaU9PWWygNpvV/QnZdpLyX47MqACkLb8fx3slgcKEmSf7Jpt4ZzhI5/FbFi7ueTfNx0X7l+/C5Y+ENqXPLMnwXLWp0WwxWarRSy/ZuypYJyPzXMK+k7EmyEn01whZuhy2UVhONtqceoaHb93t7JzRkSRhPtNMg+wQuTkVAFGUVcFTJJs4ZYIY41ZurJoPXbMSW/l3AcXbgNemqEwuicUqTW8zgGGY16Nb4OSTSgi4cOsG+hh3LHOJ0Q6/eYX/rJjHSTRsYZ6+bmwQkGv6Y1YnJ4GoXDnENf/Q3PTJLOQyDYE7cLhnxYGa8lVwLqujFp0uGTzTHJrNxhKxbIeFsFMAg/QkuuoEUuP1ZvyaERiNW24CiqHGc4iT5xMp9VcRObuFQJUiOIoallOXdyQ+v9BP3UGFubFSpQlhiIL4kDRKxL/o8RCtk2IGCSrsxtL9ACiOoqk0rGjm8I43rzt5TGreMDmBqsbW3De6Al9/arj/mUt8wqXlIomvYBIrRwneIDdKNY0/EBX4LCN18lNVpF7OekVwMYNPr9xhBJz2WMqujAJ+skx2Prqgwe/vOv1jyKBQ=
+  on:
+    tags: true
+    python: 3.6
+  distributions: sdist bdist_wheel
+  skip_existing: true
