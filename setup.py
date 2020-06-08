@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ruben-console-utilities",
-    version="0.1.1",
+    version="0.2.0",
     author="Ruben Dougall",
     # author_email="author@example.com",
     description="Simple utility functions for command-line applications.",
