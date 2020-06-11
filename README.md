@@ -1,6 +1,7 @@
 # Console Utilities
 
 [![Travis](https://travis-ci.com/Ruben9922/python-console-utilities.svg?branch=master)](https://travis-ci.com/Ruben9922/python-console-utilities)
+[![Documentation Status](https://readthedocs.org/projects/python-console-utilities/badge/?version=latest)](https://python-console-utilities.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/ruben-console-utilities)](https://pypi.org/project/ruben-console-utilities/)
 [![Licence](https://img.shields.io/github/license/Ruben9922/python-console-utilities)](https://github.com/Ruben9922/python-console-utilities/blob/master/LICENSE)
 
