@@ -1,4 +1,4 @@
-Python Console Utilities
+API Documentation
 ========================
 
 consoleutilities
