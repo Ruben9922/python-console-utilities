@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Ruben9922/python-console-utilities",
     keywords="console command-line utilities",
+    project_urls={
+        "Documentation": "https://python-console-utilities.readthedocs.io/",
+    },
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
