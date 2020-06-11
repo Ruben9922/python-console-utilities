@@ -13,10 +13,11 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
     Args:
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
         min_value: Minimum value allowed. Inclusive. Use ``None`` if a minimum value is not required.
-        max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if a
-            maximum value is not required.
+        max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if
+            a maximum value is not required.
         error_message: Error message to print after entering an invalid value.
-        include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for exclusive.
+        include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
+            exclusive.
     Returns:
         The valid integer value entered by the user.
     """
@@ -69,13 +70,15 @@ def input_float(prompt=None, min_value=None, max_value=None, error_message=None,
 
     Args:
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
-        min_value: Minimum value allowed. Inclusive if ``include_min`` is ``True``; exclusive otherwise. Use ``None`` if a
-        minimum value is not required.
-        max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if a
-            maximum value is not required.
+        min_value: Minimum value allowed. Inclusive if ``include_min`` is ``True``; exclusive otherwise. Use ``None`` if
+            a minimum value is not required.
+        max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if
+            a maximum value is not required.
         error_message: Error message to print after entering an invalid value.
-        include_min: Specifies whether the ``min_value`` is inclusive. Use ``True`` for inclusive or ``False`` for exclusive.
-        include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for exclusive.
+        include_min: Specifies whether the ``min_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
+            exclusive.
+        include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
+            exclusive.
     Returns:
         The valid float value entered by the user.
     """
@@ -143,16 +146,17 @@ def input_option_char(options: List[str], chars: List[str], prompt: str = None, 
        value is entered. Hence, this function should only ever return a valid value.
 
     ``options`` and ``chars`` are expected to be lists of the same length. Additionally, ``chars`` must not contain
-    duplicates, to avoid ambiguity. If ``ignore_case`` is ``True`` then case is also ignored when checking for duplicates.
+    duplicates, to avoid ambiguity. If ``ignore_case`` is ``True`` then case is also ignored when checking for
+    duplicates.
 
     Args:
         options: List of option names. For example: ``["Export to PDF", "Export to HTML"]``.
         chars: List of characters to associate with each option. For example: ``["p", "h"]``.
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
         error_message: Error message to print after entering an invalid value.
-        ignore_case: Specifies whether case should be ignored. If ``True``, this also means that the characters in ``chars``
-            will be output in lower case to reduce confusion for the user. (To me, displaying some characters in upper
-            case and some in lower case implies that case is not ignored.)
+        ignore_case: Specifies whether case should be ignored. If ``True``, this also means that the characters in
+            ``chars`` will be output in lower case to reduce confusion for the user. (To me, displaying some characters
+            in upper case and some in lower case implies that case is not ignored.)
 
     Returns:
         The character corresponding to the selected option.
@@ -196,7 +200,8 @@ def input_option_int(options: List[str], prompt: Optional[str] = None, error_mes
     Specifically, this function does the following:
 
     #. Displays a list of option names with their indices
-    #. Waits for the user to input an index (i.e. an integer between 0 and ``len(options) - 1``) using ``input_option_int``
+    #. Waits for the user to input an index (i.e. an integer between 0 and ``len(options) - 1``) using
+       ``input_option_int``
 
     Args:
         options: List of option names. For example: ``["Export to PDF", "Export to HTML"]``.
@@ -224,9 +229,10 @@ def input_boolean(prompt: str, default: Optional[bool] = False, error_message: O
     Args:
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
         default: Specifies the behaviour on entering an invalid value (i.e. a value other than ``true_string`` or
-            ``false_string``). If ``True``, an invalid value will be considered ``True``. If ``False``, an invalid value will be
-            considered ``False``. If ``None``, the user must enter either ``true_string`` or ``false_string``---on entering an
-            invalid value, the function will output the error message and loop until a valid value is entered.
+            ``false_string``). If ``True``, an invalid value will be considered ``True``. If ``False``, an invalid value
+            will be considered ``False``. If ``None``, the user must enter either ``true_string`` or
+            ``false_string``---on entering an invalid value, the function will output the error message and loop until a
+            valid value is entered.
         error_message: Error message to print after entering an invalid value.
         true_string: The string to be used to represent ``True``.
         false_string: The string to be used to represent ``False``.
