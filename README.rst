@@ -14,6 +14,7 @@ Python Console Utilities
     :alt: PyPI
 
 .. image:: https://img.shields.io/github/license/Ruben9922/python-console-utilities
+    :target: https://github.com/Ruben9922/python-console-utilities/blob/master/LICENSE
     :alt: GitHub
 
 This is a package containing utility functions for command-line applications.
