@@ -1,8 +1,3 @@
-"""
-Note: As this library is still in version 0.y.z, keep in mind that the API may change at any time. See Item 4 of the
-Semantic Versioning Specification: https://semver.org/#spec-item-4.
-"""
-
 from typing import Optional, List
 
 
