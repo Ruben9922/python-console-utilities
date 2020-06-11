@@ -1,4 +1,4 @@
 .. toctree::
    :maxdepth: 2
 
-   content/consoleutilities.rst
+   api/consoleutilities.rst
