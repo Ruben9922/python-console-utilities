@@ -15,7 +15,8 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
         min_value: Minimum value allowed. Inclusive. Use ``None`` if a minimum value is not required.
         max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if
             a maximum value is not required.
-        error_message: Error message to print after entering an invalid value.
+        error_message: Error message to print after entering an invalid value. Use ``None`` for the default error
+            message.
         include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
             exclusive.
     Returns:
@@ -74,7 +75,8 @@ def input_float(prompt=None, min_value=None, max_value=None, error_message=None,
             a minimum value is not required.
         max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None`` if
             a maximum value is not required.
-        error_message: Error message to print after entering an invalid value.
+        error_message: Error message to print after entering an invalid value. Use ``None`` for the default error
+            message.
         include_min: Specifies whether the ``min_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
             exclusive.
         include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
@@ -153,7 +155,8 @@ def input_option_char(options: List[str], chars: List[str], prompt: str = None, 
         options: List of option names. For example: ``["Export to PDF", "Export to HTML"]``.
         chars: List of characters to associate with each option. For example: ``["p", "h"]``.
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
-        error_message: Error message to print after entering an invalid value.
+        error_message: Error message to print after entering an invalid value. Use ``None`` for the default error
+            message.
         ignore_case: Specifies whether case should be ignored. If ``True``, this also means that the characters in
             ``chars`` will be output in lower case to reduce confusion for the user. (To me, displaying some characters
             in upper case and some in lower case implies that case is not ignored.)
@@ -206,7 +209,8 @@ def input_option_int(options: List[str], prompt: Optional[str] = None, error_mes
     Args:
         options: List of option names. For example: ``["Export to PDF", "Export to HTML"]``.
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
-        error_message: Error message to print after entering an invalid value.
+        error_message: Error message to print after entering an invalid value. Use ``None`` for the default error
+            message.
 
     Returns:
         The index of the selected option.
@@ -224,7 +228,8 @@ def input_boolean(prompt: str, default: Optional[bool] = False, error_message: O
     Specifically, this function does the following:
 
     #. Displays a list of option names with their indices
-    #. Waits for the user to input an index (i.e. an integer between 0 and ``len(options) - 1``) using ``input_option_int``
+    #. Waits for the user to input an index (i.e. an integer between 0 and ``len(options) - 1``) using
+       :func:`input_option_int`
 
     Args:
         prompt: Prompt message to print on waiting for input. Use ``None`` for the default prompt.
@@ -233,7 +238,8 @@ def input_boolean(prompt: str, default: Optional[bool] = False, error_message: O
             will be considered ``False``. If ``None``, the user must enter either ``true_string`` or
             ``false_string``---on entering an invalid value, the function will output the error message and loop until a
             valid value is entered.
-        error_message: Error message to print after entering an invalid value.
+        error_message: Error message to print after entering an invalid value. Use ``None`` for the default error
+            message. Ignored if ``default`` is not `None`.
         true_string: The string to be used to represent ``True``.
         false_string: The string to be used to represent ``False``.
 
