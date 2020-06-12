@@ -235,7 +235,7 @@ def input_boolean(prompt: str, default: Optional[bool] = False, error_message: O
 
     #.  Prints the prompt
     #.  Waits for the user to enter a value
-    #.  Checks the value is valid (i.e. is a valid integer and in the specified range, if applicable).
+    #.  Checks the value is valid (i.e. equal to ``true_string`` or ``false_string``).
     #.  If valid, the corresponding boolean value is returned (i.e. ``True`` for ``true_string`` and ``False`` for
         ``false_string``). If not valid, the default value will be returned. If not valid and a default has not been
         provided, the error message is printed and the function loops until a valid value is entered.
