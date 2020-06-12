@@ -60,8 +60,8 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
             print(error_message)
 
 
-def input_float(prompt=None, min_value=None, max_value=None, error_message=None, include_min=True, include_max=False) \
-        -> float:
+def input_float(prompt: Optional[str] = None, min_value: Optional[float] = None, max_value: Optional[float] = None,
+                error_message: Optional[str] = None, include_min: bool = True, include_max: bool = False) -> float:
     """Allows the user to input a float, possibly within a specified range.
 
     Specifically, this function prints the prompt, waits for the user to enter a value, and checks the value is valid
