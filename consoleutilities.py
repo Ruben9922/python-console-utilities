@@ -1,8 +1,27 @@
-from typing import Optional, List
+from typing import Optional, List, TypeVar, Callable
+
+T = TypeVar("T")
+
+
+def input_valid(prompt: str, error_message: str, default: Optional[T], parse: Callable[[str], T],
+                is_valid: Callable[[T], bool]) -> T:
+    while True:
+        try:
+            value = parse(input(prompt))
+
+            if is_valid(value):
+                return value
+        except ValueError:
+            pass
+
+        if default is None:
+            print(error_message)
+        else:
+            return default
 
 
 def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max_value: Optional[int] = None,
-              error_message: Optional[str] = None, include_max: bool = False) -> int:
+              error_message: Optional[str] = None, include_max: bool = False, default: Optional[int] = None) -> int:
     """Allows the user to input an integer, possibly within a specified range.
 
     Specifically, this function does the following:
@@ -22,6 +41,8 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
             be used.
         include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
             exclusive.
+        default: Specifies a default value to return on entering an invalid value. If ``None``, the function will loop
+            until a valid value is entered.
     Returns:
         The valid integer value entered by the user.
     """
@@ -39,6 +60,7 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
 
             suffix = f" [{min_value_string}..{max_value_string}]"
         prompt = f"Enter integer{suffix}: "
+
     if error_message is None:
         if min_value is not None and max_value is not None:
             error_message = f"Integers between {min_value} and {max_value} (inclusive) only."
@@ -49,22 +71,15 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
         else:
             error_message = "Integers only."
 
-    while True:
-        try:
-            value = int(input(prompt))
+    def is_valid(value: int) -> bool:
+        return (min_value is None or value >= min_value) and (max_value is None or value <= max_value)
 
-            valid = (min_value is None or value >= min_value) and (max_value is None or value <= max_value)
-
-            if valid:
-                return value
-
-            print(error_message)
-        except ValueError:
-            print(error_message)
+    return input_valid(prompt, error_message, default, int, is_valid)
 
 
 def input_float(prompt: Optional[str] = None, min_value: Optional[float] = None, max_value: Optional[float] = None,
-                error_message: Optional[str] = None, include_min: bool = True, include_max: bool = False) -> float:
+                error_message: Optional[str] = None, include_min: bool = True, include_max: bool = False,
+                default: Optional[float] = None) -> float:
     """Allows the user to input a float, possibly within a specified range.
 
     Specifically, this function does the following:
@@ -87,6 +102,8 @@ def input_float(prompt: Optional[str] = None, min_value: Optional[float] = None,
             exclusive.
         include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
             exclusive.
+        default: Specifies a default value to return on entering an invalid value. If ``None``, the function will loop
+            until a valid value is entered.
     Returns:
         The valid float value entered by the user.
     """
@@ -122,26 +139,16 @@ def input_float(prompt: Optional[str] = None, min_value: Optional[float] = None,
         else:
             error_message = "Real numbers only."
 
-    while True:
-        try:
-            value = float(input(prompt))
+    def is_valid(value: float) -> bool:
+        min_condition = value >= min_value if include_min else value > min_value
+        max_condition = value <= max_value if include_max else value < max_value
+        return (min_value is None or min_condition) and (max_value is None or max_condition)
 
-            min_condition = value >= min_value if include_min else value > min_value
-            max_condition = value <= max_value if include_max else value < max_value
-            valid = (min_value is None or min_condition) and (max_value is None or max_condition)
-            # valid = (min_value is None or value >= min_value) and (max_value is None or value <= max_value) \
-            #         and (include_max or value < max_value)
-
-            if valid:
-                return value
-
-            print(error_message)
-        except ValueError:
-            print(error_message)
+    return input_valid(prompt, error_message, default, float, is_valid)
 
 
 def input_option_char(options: List[str], chars: List[str], prompt: str = None, error_message: str = None,
-                      ignore_case: bool = True) -> str:
+                      ignore_case: bool = True, default: Optional[str] = None) -> str:
     """Allows the user to select from a list of options by entering a character.
 
     Specifically, this function does the following:
@@ -166,6 +173,8 @@ def input_option_char(options: List[str], chars: List[str], prompt: str = None, 
         ignore_case: Specifies whether case should be ignored. If ``True``, this also means that the characters in
             ``chars`` will be output in lower case to reduce confusion for the user. (To me, displaying some characters
             in upper case and some in lower case implies that case is not ignored.)
+        default: Specifies a default value to return on entering an invalid value. If ``None``, the function will loop
+            until a valid value is entered.
 
     Returns:
         The character corresponding to the selected option.
@@ -191,16 +200,7 @@ def input_option_char(options: List[str], chars: List[str], prompt: str = None, 
     for option, char in zip(options, chars):
         print(f"[{char}]: {option}")
 
-    while True:
-        char = input(prompt)
-
-        if ignore_case:
-            char = char.lower()
-
-        valid = char in chars
-        if valid:
-            return char
-        print(error_message)
+    return input_valid(prompt, error_message, default, lambda s: s.lower() if ignore_case else s, lambda v: v in chars)
 
 
 def input_option_int(options: List[str], prompt: Optional[str] = None, error_message: Optional[str] = None) -> int:
@@ -217,6 +217,8 @@ def input_option_int(options: List[str], prompt: Optional[str] = None, error_mes
         prompt: Prompt message to print on waiting for input. If ``None``, the default prompt will be used.
         error_message: Error message to print on entering an invalid value. If ``None``, the default error message will
             be used.
+        default: Specifies a default value to return on entering an invalid value. If ``None``, the function will loop
+            until a valid value is entered.
 
     Returns:
         The index of the selected option.
@@ -260,19 +262,16 @@ def input_boolean(prompt: str, default: Optional[bool] = False, error_message: O
     # Generate full prompt
     prompt = f"{prompt} [{true_string.upper() if default == True else true_string.lower()}/{false_string.upper() if default == False else false_string.lower()}]: "
 
-    if default is None:
-        # Generate error message if not provided
-        if error_message is None:
-            error_message = f"Only \"{true_string}\" or \"{false_string}\" is allowed."
+    # Generate error message if not provided
+    if error_message is None:
+        error_message = f"Only \"{true_string}\" or \"{false_string}\" is allowed."
 
-        while True:
-            value = input(prompt).lower()
-            if value == true_string:
-                return True
-            if value == false_string:
-                return False
-            print(error_message)
-    elif default:  # If default is True
-        return input(prompt).lower() != false_string
-    else:
-        return input(prompt).lower() == true_string
+    def parse(input_string: str) -> bool:
+        input_string = input_string.lower()
+        if input_string == true_string:
+            return True
+        if input_string == false_string:
+            return False
+        raise ValueError(f"invalid string - string was not {true_string} or {false_string}: {input_string}")
+
+    return input_valid(prompt, error_message, default, parse, lambda v: True)
