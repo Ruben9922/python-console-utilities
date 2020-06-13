@@ -10,7 +10,7 @@ setuptools.setup(
     author_email="info.ruebz999@gmail.com",
     description="Simple utility functions for command-line applications.",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/Ruben9922/python-console-utilities",
     keywords="console command-line utilities",
     project_urls={
