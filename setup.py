@@ -11,10 +11,10 @@ setuptools.setup(
     description="Simple utility functions for command-line applications.",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://github.com/Ruben9922/python-console-utilities",
     keywords="console command-line utilities",
     project_urls={
         "Documentation": "https://python-console-utilities.readthedocs.io/",
+        "Source Code": "https://github.com/Ruben9922/python-console-utilities",
     },
     packages=setuptools.find_packages(),
     classifiers=[
