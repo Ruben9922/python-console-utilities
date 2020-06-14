@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="ruben-console-utilities",
-    version="0.2.1",
+    version="0.2.2",
     author="Ruben Dougall",
     author_email="info.ruebz999@gmail.com",
     description="Simple utility functions for command-line applications.",
