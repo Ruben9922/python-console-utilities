@@ -1,3 +1,5 @@
+# TODO: Strip whitespace
+
 from typing import Optional, List, TypeVar, Callable
 
 T = TypeVar("T")
