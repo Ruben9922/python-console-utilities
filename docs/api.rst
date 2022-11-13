@@ -1,8 +1,8 @@
 API Reference
 =============
 
-consoleutilities Module
+console_utilities Module
 -----------------------
 
-.. automodule:: consoleutilities
+.. automodule:: console_utilities
     :members:
