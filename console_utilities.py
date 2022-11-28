@@ -79,6 +79,72 @@ def input_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max
     return input_valid(prompt, error_message, default, int, is_valid)
 
 
+def input_multiple_int(prompt: Optional[str] = None, min_value: Optional[int] = None, max_value: Optional[int] = None,
+                       error_message: Optional[str] = None, include_max: bool = False,
+                       default: Optional[List[int]] = None, separator: Optional[str] = None, allow_empty: bool = True)\
+        -> List[int]:
+    """Allows the user to input multiple integers, optionally with each in a specified range.
+
+    :param prompt: Prompt message to print on waiting for input. If ``None``, the default prompt will be used.
+    :param min_value: Minimum value allowed. Inclusive. Use ``None`` if a minimum value is not required.
+    :param max_value: Maximum value allowed. Inclusive if ``include_max`` is ``True``; exclusive otherwise. Use ``None``
+        if a maximum value is not required.
+    :param error_message: Error message to print on entering an invalid value. If ``None``, the default error message
+        will be used.
+    :param include_max: Specifies whether the ``max_value`` is inclusive. Use ``True`` for inclusive or ``False`` for
+        exclusive.
+    :param default: Specifies a default value to return on entering an invalid value. If ``None``, the function will
+        loop until a valid value is entered.
+    :param separator: Specifies the separator string to use when splitting the input into multiple values. If ``None``
+        or an empty string, then whitespace will be used.
+    :param allow_empty: Specifies whether no values may be entered. If ``True``, zero or more values may be entered; if
+        ``False``, one or more values may be entered.
+    :return: The valid integer values entered by the user.
+    """
+    if max_value is not None and not include_max:
+        max_value -= 1
+
+    # If separator is empty string, set it to None, so that str.split doesn't throw an error
+    if not separator:
+        separator = None
+
+    count_substring = "zero or more" if allow_empty else "one or more"
+    separator_string = f"\"{separator}\"" if separator else "whitespace"
+    separator_substring = f"separated by {separator_string}"
+
+    # Generate prompt and error messages if not provided
+    if prompt is None:
+        if min_value is None and max_value is None:
+            range_substring = ""
+        else:
+            min_value_string = str(min_value) if min_value is not None else ""
+            max_value_string = str(max_value) if max_value is not None else ""
+
+            range_substring = f" [{min_value_string}..{max_value_string}]"
+        prompt = f"Enter {count_substring} integers ({separator_substring}){range_substring}: "
+
+    if error_message is None:
+        if min_value is not None and max_value is not None:
+            range_substring = f"integers between {min_value} and {max_value} (inclusive) only"
+        elif min_value is not None:
+            range_substring = f"integers greater than or equal to {min_value} only"
+        elif max_value is not None:
+            range_substring = f"integers less than or equal to {max_value} only"
+        else:
+            range_substring = "integers only"
+        error_message = f"{count_substring} {range_substring} ({separator_substring}).".capitalize()
+
+    def parse(value: str) -> List[int]:
+        return list(map(int, value.split(separator)))
+
+    def is_valid(values: List[int]) -> bool:
+        return (allow_empty or values)\
+               and all((min_value is None or value >= min_value) and (max_value is None or value <= max_value)
+                       for value in values)
+
+    return input_valid(prompt, error_message, default, parse, is_valid)
+
+
 def input_float(prompt: Optional[str] = None, min_value: Optional[float] = None, max_value: Optional[float] = None,
                 error_message: Optional[str] = None, include_min: bool = True, include_max: bool = False,
                 default: Optional[float] = None) -> float:
@@ -206,7 +272,7 @@ def input_option_char(options: List[str], chars: List[str], prompt: str = None, 
 
 
 def input_option_int(options: List[str], prompt: Optional[str] = None, error_message: Optional[str] = None) -> int:
-    """Allows the user to select from a list of options by entering the option's index.
+    """Allows the user to select a single option from a list of options by entering the option's index.
 
     Specifically, this function does the following:
 
@@ -229,6 +295,27 @@ def input_option_int(options: List[str], prompt: Optional[str] = None, error_mes
     for index, option in enumerate(options):
         print(f"[{index}]: {option}")
     return input_int(prompt, 0, len(options), error_message)
+
+
+# todo: allow repeats
+def input_multiple_option_int(options: List[str], prompt: Optional[str] = None, error_message: Optional[str] = None,
+                              separator: Optional[str] = None, allow_empty: bool = True) -> List[int]:
+    """Allows the user to select multiple options from a list of options by entering the options' indices.
+
+    :param options: List of option names. Example: ``["Export to PDF", "Export to HTML"]``.
+    :param prompt: Prompt message to print on waiting for input. If ``None``, the default prompt will be used.
+    :param error_message: Error message to print on entering an invalid value. If ``None``, the default error message
+        will be used.
+    :param separator: Specifies the separator string to use when splitting the input into multiple values. If ``None``
+        or an empty string, then whitespace will be used.
+    :param allow_empty: Specifies whether no values may be entered. If ``True``, zero or more values may be entered; if
+        ``False``, one or more values may be entered.
+    :return: The indices of the selected options.
+    """
+    for index, option in enumerate(options):
+        print(f"[{index}]: {option}")
+    return input_multiple_int(prompt, min_value=0, max_value=len(options), error_message=error_message,
+                              separator=separator, allow_empty=allow_empty)
 
 
 def input_boolean(prompt: str, default: Optional[bool] = False, error_message: Optional[str] = None,

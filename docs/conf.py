@@ -22,7 +22,7 @@ copyright = '2020, Ruben Dougall'
 author = 'Ruben Dougall'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.2'
+release = '0.3.0'
 
 
 # -- General configuration ---------------------------------------------------
