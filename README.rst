@@ -1,9 +1,9 @@
 Python Console Utilities
 ========================
 
-.. image:: https://travis-ci.com/Ruben9922/python-console-utilities.svg?branch=master
-    :target: https://travis-ci.com/Ruben9922/python-console-utilities
-    :alt: Build Status
+.. image:: https://github.com/Ruben9922/python-console-utilities/actions/workflows/python-publish.yml/badge.svg
+    :target: https://github.com/Ruben9922/python-console-utilities/actions/workflows/python-publish.yml
+    :alt: Upload Python Package
 
 .. image:: https://readthedocs.org/projects/python-console-utilities/badge/?version=latest
     :target: https://python-console-utilities.readthedocs.io/en/latest/?badge=latest
